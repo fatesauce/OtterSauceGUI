@@ -1,0 +1,622 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OtterSauceGui</name>
+    </assembly>
+    <members>
+        <member name="T:OtterSauceGui.ButtonType">
+            <summary>
+            Used to define what type of button the GuiButton will be. Defaults to NORMAL
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.ButtonType.NORMAL">
+            <summary>
+            A NORMAL GuiButton is a button that has to be clicked each time you want it to fire
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.ButtonType.TOGGLE">
+            <summary>
+            A TOGGLE button is a button that can be switched on of off.  Uses the isSelected flag and OnSelectedEvent/OnDeselected event
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.ButtonType.RADIO">
+            <summary>
+            A RADIO button is added to a group of other RADIO buttons.  Like the TOGGLE button, it uses the OnSelectedEvent and OnDeselected event.  Unlike the
+            TOGGLE button, a single RADIO button cannot be switched on and off, and is only deselected when another RADIO button in the same group is
+            selected
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.ButtonType.DOWNABLE">
+            <summary>
+            A DOWNABLE button is like the NORMAL button except that it will fire the OnClickEvent each frame while the mouse button is held down.
+            </summary>
+        </member>
+        <member name="T:OtterSauceGui.GuiButton">
+            <summary>
+            This class is used to create your "buttons" before adding them to the GuiManager.  All button types are created with this class.
+            </summary>
+        </member>
+        <member name="T:OtterSauceGui.Widjet">
+            <summary>
+            The base class for all Widjets.  Do not use this class directly.  
+            Contains information and rules for how subclasses should behave when certain things happen in your game,
+            as well as primary information that all subclassed Widjets should have.
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.isShortcutSet">
+            <summary>
+            If a shortcut is defined, this will be set to true and the widjet will listen for the key to be pressed.
+            Do not use shortcuts if there are GuiTextBoxes in your gui
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet._shortcut">
+            <summary>
+            The Key to be used as the shortcut key for this widjet.
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet._label">
+            <summary>
+            A text label to display next to your Widjet
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.game">
+            <summary>
+            Current game instance
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.Width">
+            <summary>
+            Width of the widjet
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.Height">
+            <summary>
+            Height of the widjet
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.PosX">
+            <summary>
+            X coordinate relative to its surface
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.PosY">
+            <summary>
+            Y coordinate relative to its surface
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.clickTimer">
+            <summary>
+            How long a "click" graphic should disply, in frames, before firing the next event
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.clickCounter">
+            <summary>
+            Counts the frames when clicked
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.isDownable">
+            <summary>
+            Used for ButtonType.DOWNABLE GuiButtons.  If true, will repeatedly fire OnClickEvent when the left mouse button
+            is held down on a widjet.  If false, will only fire OnClickEvent once when the button is clicked.
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.hasOnClickFired">
+            <summary>
+            Flag used to tell other events if the OnClickEvent has been invoked
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.hasOnActiveFired">
+            <summary>
+            Flag used to tell other events if the OnActiveEvent has been invoked
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.hasOnInactiveFired">
+            <summary>
+            Flag used to tell other events if the OnInactiveEvent has been invoked
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.hasOnHoverFired">
+            <summary>
+            Flag used to tell other events if the OnHoverEvent has been invoked
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.isActive">
+            <summary>
+            If a widjet has just been clicked, it becomes "active".  
+            There can only be one active widjet at any time regardless of grouping, or which GuiManager the widjet belongs to
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.isDisabled">
+            <summary>
+            Set to true to disable input on this widjet
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.hasClicked">
+            <summary>
+            If a widjet has just been clicked
+            </summary>
+        </member>
+        <member name="M:OtterSauceGui.Widjet.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initialises the widjet with basic properties required by all widgets, and initialises events for the widjet
+            </summary>
+            <param name="px">X position of the widjet relative to the GuiManagers surface</param>
+            <param name="py">Y position of the widjet relative to the GuiManagers surface</param>
+            <param name="w">Width of the widjet</param>
+            <param name="h">Height of the widjet</param>
+        </member>
+        <member name="M:OtterSauceGui.Widjet.ClickTimer">
+            <summary>
+            Checks the click timer and sets hasClicked as false if the timer has finished
+            </summary>
+        </member>
+        <member name="M:OtterSauceGui.Widjet.OnActive(System.Object,System.EventArgs)">
+            <summary>
+            The default method added to OnActiveEvent.  Is triggered by all widjets.
+            Dont call this method directly
+            </summary>
+            <param name="sender">EventHandler parameter</param>
+            <param name="e">EventHandler parameter</param>
+        </member>
+        <member name="M:OtterSauceGui.Widjet.OnInactive(System.Object,System.EventArgs)">
+            <summary>
+            The default method added to OnInactiveEvent.  Is triggered by all widjets.
+            Dont call this method directly
+            </summary>
+            <param name="sender">EventHandler parameter</param>
+            <param name="e">EventHandler parameter</param>
+        </member>
+        <member name="M:OtterSauceGui.Widjet.OnClick(System.Object,System.EventArgs)">
+            <summary>
+            The default method added to OnClickEvent.  Is triggered by all widjets.
+            Dont call this method directly
+            </summary>
+            <param name="sender">EventHandler parameter</param>
+            <param name="e">EventHandler parameter</param>
+        </member>
+        <member name="M:OtterSauceGui.Widjet.OnHover(System.Object,System.EventArgs)">
+            <summary>
+            The default method added to OnHoverEvent.  Is triggered by all widjets.
+            Dont call this method directly
+            </summary>
+            <param name="sender">EventHandler parameter</param>
+            <param name="e">EventHandler parameter</param>
+        </member>
+        <member name="M:OtterSauceGui.Widjet.SetGame(Otter.Game)">
+            <summary>
+            Sets the game instance for the widjet to use.
+            Dont call this directly.
+            </summary>
+            <param name="g">The current game instance</param>
+        </member>
+        <member name="M:OtterSauceGui.Widjet.SetShortcut(Otter.Key)">
+            <summary>
+            Set the shortcut key you want to trigger the widjet.  Using the shortcut key
+            invokes an OnClickEvent.
+            Dont use shortcuts if your gui contains a GuiTextBox
+            </summary>
+            <param name="k">The Key you want to reserve for the widjet</param>
+        </member>
+        <member name="M:OtterSauceGui.Widjet.Click">
+            <summary>
+            Call this to manually simulate a click on a widjet from within your code.
+            </summary>
+        </member>
+        <member name="M:OtterSauceGui.Widjet.ResetEventFlags">
+            <summary>
+            Resets flags each time an event is fired, to allow other events to fire.
+            The flags help control when events are fired and how frequently.
+            </summary>
+        </member>
+        <member name="M:OtterSauceGui.Widjet.CheckBounds">
+            <summary>
+            This method is in charge of checking collisions, your mouse position in the gui, and fires events based
+            on user actions.
+            </summary>
+        </member>
+        <member name="M:OtterSauceGui.Widjet.CheckKey">
+            <summary>
+            If you set a shortcut key for the widjet, this method checks to see
+            when the user presses the key, and responds to it with a Click()
+            </summary>
+        </member>
+        <member name="M:OtterSauceGui.Widjet.CheckMouseClick">
+            <summary>
+            Checks if the mouse has been "Pressed" or is "down" based on the widjet type.
+            </summary>
+            <returns>Returns true if the mouse is clicked in the bounds of a widjet</returns>
+        </member>
+        <member name="E:OtterSauceGui.Widjet.OnClickEvent">
+            <summary>
+            Fired when a user clicks a widjet.  In most cases it will only fire ONCE per click.
+            If the widjet field "isDownable" is true, it will fire EVERY FRAME while the mouse button is held over it.
+            </summary>
+        </member>
+        <member name="E:OtterSauceGui.Widjet.OnActiveEvent">
+            <summary>
+            Fired ONCE when a widjet becomes active.  A widjet becomes active after the user clicks on it.  Only one widjet can be active in the game scene at any one time.
+            Used mainly for changing widjet graphics based on the isActive flag, and for choosing which GuiTextBox should allow input.
+            </summary>
+        </member>
+        <member name="E:OtterSauceGui.Widjet.OnInactiveEvent">
+            <summary>
+            Fires ONCE when a widjet becomes inactive.  Used mainly for preventing GuiTextBox input and changing widjet graphics.
+            </summary>
+        </member>
+        <member name="E:OtterSauceGui.Widjet.OnHoverEvent">
+            <summary>
+            Fires ONCE when a users mouse hovors over the widjet.  Used mainly for changing the widjet graphic.  
+            Reverts back to an "active" or "inactive" graphic when the mouse moves out of bounds of the widjet.
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.GuiButton.buttonGroup">
+            <summary>
+            Contains a list of other RADIO GuiButtons that share the same group as this widjet.
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.GuiButton.groupName">
+            <summary>
+            The name of the group the GuiButton is part of.
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.GuiButton.buttonID">
+            <summary>
+            Used to sign a unique identifier to the GuiButton
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.GuiButton.isDefaultImage">
+            <summary>
+            If true, then no base graphics have been defined for the GuiButton, so the GuiButton will use ugly rectangle primatives instead :)
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.GuiButton.isSelected">
+            <summary>
+            Used with TOGGLE GuiButtons and RADIO GuiButtons to mark if the button is selected or not
+            </summary>
+        </member>
+        <member name="M:OtterSauceGui.GuiButton.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,OtterSauceGui.ButtonType)">
+            <summary>
+            Creates the GuiButton component to be added to the GuiManager and initialises basic fields 
+            </summary>
+            <param name="px">X position of the GuiButton relative to the GuiManagers Surface</param>
+            <param name="py">Y position of the GuiButton relative to the GuiManagers Surface</param>
+            <param name="w">Width of the widjet</param>
+            <param name="h">Height of the widjet</param>
+            <param name="type">The type of GuiButton to create.  This will determine how the GuiButton will behave.  Defaults to NORMAL</param>
+        </member>
+        <member name="M:OtterSauceGui.GuiButton.Update">
+            <summary>
+            Adds added logic specific to RADIO and TOGGLE buttons to the Widjet update loop
+            </summary>
+        </member>
+        <member name="M:OtterSauceGui.GuiButton.Added">
+            <summary>
+            When the component is added to GuiManager, checks to see if the button has any base images defined.  If no images have been set, the button will use
+            defaults (ugly rectangles)
+            </summary>
+        </member>
+        <member name="M:OtterSauceGui.GuiButton.Render">
+            <summary>
+            Components have no native 'Graphic' attributes/fields like Entities do, so the images have to be rendered here.
+            </summary>
+        </member>
+        <member name="M:OtterSauceGui.GuiButton.OnActive(System.Object,System.EventArgs)">
+            <summary>
+            Adds some basic/default behavior for button graphics to the OnActiveEvent
+            </summary>
+            <param name="sender">EventHandler parameters</param>
+            <param name="e">EventHandler parameters</param>
+        </member>
+        <member name="M:OtterSauceGui.GuiButton.OnInactive(System.Object,System.EventArgs)">
+            <summary>
+            Adds some basic/default behavior for button graphics to the OnInactiveEvent
+            </summary>
+            <param name="sender">EventHandler parameters</param>
+            <param name="e">EventHandler parameters</param>
+        </member>
+        <member name="M:OtterSauceGui.GuiButton.OnClick(System.Object,System.EventArgs)">
+            <summary>
+            Adds some basic/default behavior for button graphics to the OnClickEvent
+            </summary>
+            <param name="sender">EventHandler parameters</param>
+            <param name="e">EventHandler parameters</param>
+        </member>
+        <member name="M:OtterSauceGui.GuiButton.OnHover(System.Object,System.EventArgs)">
+            <summary>
+            Adds some basic/default behavior for button graphics to the OnHoverEvent
+            </summary>
+            <param name="sender">EventHandler parameters</param>
+            <param name="e">EventHandler parameters</param>
+        </member>
+        <member name="M:OtterSauceGui.GuiButton.OnSelected(System.Object,System.EventArgs)">
+            <summary>
+            Default method added to the OnSelectedEvent
+            </summary>
+            <param name="sender">EventHandler parameters</param>
+            <param name="e">EventHandler parameters</param>
+        </member>
+        <member name="M:OtterSauceGui.GuiButton.OnDeselected(System.Object,System.EventArgs)">
+            <summary>
+            Default method added to the OnDeselectedEvent
+            </summary>
+            <param name="sender">EventHandler parameters</param>
+            <param name="e">EventHandler parameters</param>
+        </member>
+        <member name="M:OtterSauceGui.GuiButton.SetText(System.String,System.String,System.Int32,Otter.Color)">
+            <summary>
+            Set the text to be displayed on the button
+            </summary>
+            <param name="text">The text string</param>
+            <param name="fontPath">The path of the font you wish to use. Use "" for the default Otter font..</param>
+            <param name="size">Font size.</param>
+        </member>
+        <member name="M:OtterSauceGui.GuiButton.SetSpriteMap(System.String)">
+            <summary>
+            Define a spritemap to be used by the button.  Each spritemap should contain either 3, or 4 images.  Each image will be used depending on which
+            event state its in.  If you do not want your buttons to change their appearance when "active", use a spritemap with only 3 images. The "active" and "inactive" images will be the same.
+            The images in the spritemap will be used in this index order:
+            index 0: "inactive" image
+            index 1: "hover" image
+            index 2: "clicked" image
+            index 3: "active" image
+            </summary>
+            <param name="path">The path where the graphic file is stored</param>
+        </member>
+        <member name="M:OtterSauceGui.GuiButton.SetSpriteMap(Otter.Spritemap{System.String})">
+            <summary>
+            Add your own SpriteMap to your GuiButton.  Make sure it contains 4 animations named: "active", "inactive", "clicked", and "hover".
+            </summary>
+            <param name="spritemap">The spritemap to use for the button</param>
+        </member>
+        <member name="M:OtterSauceGui.GuiButton.ChangeText(System.String)">
+            <summary>
+            Sets the buttons text to a new string.  Will throw an error if "SetText" has never been called.
+            </summary>
+            <param name="text">The new text for the button</param>
+        </member>
+        <member name="M:OtterSauceGui.GuiButton.CheckType">
+            <summary>
+            Runs certain methods based on the buttons ButtonType
+            </summary>
+        </member>
+        <member name="M:OtterSauceGui.GuiButton.CheckGroup">
+            <summary>
+            Used for RADIO buttons.  When a RADIO button is selected, all other RADIO buttons in the group are
+            deselected
+            </summary>
+        </member>
+        <member name="M:OtterSauceGui.GuiButton.CheckSelected">
+            <summary>
+            Used for TOGGLE buttons to alternate their selected state on clicking
+            </summary>
+        </member>
+        <member name="E:OtterSauceGui.GuiButton.OnSelectedEvent">
+            <summary>
+            Fires when a TOGGLE or RADIO GuiButton is clicked on.  Not the same as OnActiveEvent.  Many widjets can be flagged as "selected" at the same time.
+            </summary>
+        </member>
+        <member name="E:OtterSauceGui.GuiButton.OnDeselectedEvent">
+            <summary>
+            Fires when a TOGGLE or RADIO GuiButton is deselected.
+            </summary>
+        </member>
+        <member name="T:OtterSauceGui.GuiManager">
+            <summary>
+            This is the base class for creating an OtterSauceGui in Otter.
+            Use AddWidjet to add widgets to this entity, then add the GuiManager object to your Scene after you have added the widjets.
+            </summary>
+        </member>
+        <member name="M:OtterSauceGui.GuiManager.#ctor(Otter.Game,Otter.Surface)">
+            <summary>
+            Create a new GuiManager entity to add gui widjets to
+            </summary>
+            <param name="g">The instance of the game. Used for passing certain values to widjets</param>
+            <param name="s">The Surface in your Scene you wish to render the gui to</param>
+        </member>
+        <member name="M:OtterSauceGui.GuiManager.AddButtonToGroup(System.String,OtterSauceGui.GuiButton)">
+            <summary>
+            Use this method to add buttons with the type ButtonType.RADIO to a group, so they can react to each other.
+            The buttons may not function correctly if they are not ButtonType.RADIO
+            </summary>
+            <param name="name">The name of the group.  Each name represents a different group</param>
+            <param name="button">The Button you wish to add</param>
+        </member>
+        <member name="M:OtterSauceGui.GuiManager.AddWidjet(OtterSauceGui.Widjet)">
+            <summary>
+            When you have created a widjet and definded its properties, Use this to add the Widjet component to 
+            your GuiManager object
+            </summary>
+            <param name="w">The widjet you wish to add</param>
+        </member>
+        <member name="M:OtterSauceGui.GuiManager.CreateGroups">
+            <summary>
+            Creates a list for each group of radio buttons, and passes the list to each button in
+            the group to make them aware of eachother
+            </summary>
+        </member>
+        <member name="T:OtterSauceGui.GuiPointer">
+            <summary>
+            A simple stand alone entity.  This is not a widjet and must be added to your Scene like any other entity.
+            I recommend adding it to the same surface as your GuiManager object, and adding it to the scene after the GuiManager.
+            The ONLY purpose of this class is to give you the ability to create a custom graphical mouse cursor, by assigning a Graphic 
+            to a GuiPointer object.
+            For best results, set MouseVisible to false, to hide the OS mouse cursor.
+            </summary>
+        </member>
+        <member name="T:OtterSauceGui.TextBoxType">
+            <summary>
+            Used to define what characters you wish to allow the user to input
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.TextBoxType.NORMAL">
+            <summary>
+            The default type for text boxes is NORMAL.  Will allow all alphanumerical and special characters.
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.TextBoxType.PASSWORD">
+            <summary>
+            Will accept the same characters as NORMAL, but will not display them. (replaces characters with "*").  
+            Call GetPassword() to retrieve the raw password from the  text box for processing
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.TextBoxType.EMAIL">
+            <summary>
+            Allows alpha characters, ".", "-", "_", and "@" characters
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.TextBoxType.NUMERICAL">
+            <summary>
+            Allows numbers to be entered only
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.TextBoxType.NUMERICALDECI">
+            <summary>
+            Allows numbers and the "." character
+            </summary>
+        </member>
+        <member name="T:OtterSauceGui.GuiTextBox">
+            <summary>
+            This class allows you to create text boxes to add to your GuiManager.  Text boxes are designed to accept a single line of input.
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.GuiTextBox.MaxCharacters">
+            <summary>
+            The maximum amount of characters the user can input and display at once
+            </summary>
+        </member>
+        <member name="M:OtterSauceGui.GuiTextBox.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,OtterSauceGui.TextBoxType)">
+            <summary>
+            Creates and initialises your textbox widget.  After you create it and adjust its properties,
+            add it to the GuiManager with AddWidjet
+            </summary>
+            <param name="px">X position of the widjet relative to the GuiManagers Surface</param>
+            <param name="py">Y position of the widjet relative to the GuiManagers Surface</param>
+            <param name="w">Width of widjet</param>
+            <param name="h">Height of widjet</param>
+            <param name="size">Font size of input</param>
+            <param name="type">Type of input</param>
+        </member>
+        <member name="M:OtterSauceGui.GuiTextBox.Update">
+            <summary>
+            Controls the behavior of the textbox relative to users actions and input
+            </summary>
+        </member>
+        <member name="M:OtterSauceGui.GuiTextBox.Render">
+            <summary>
+            Components have no native Graphic fields, so graphics for the textbox component have to be Drawn 
+            in the Render loop
+            </summary>
+        </member>
+        <member name="M:OtterSauceGui.GuiTextBox.OnClick(System.Object,System.EventArgs)">
+            <summary>
+            Notifies the parent GuiManager that the user is inputing text, so will disable the use of shortcut keys.
+            Its recommended to disable player controls while typing.  Add a condition in your control logic to check the
+            GuiManagers "isTyping" flag.
+            </summary>
+            <param name="sender">EventHandler parameter</param>
+            <param name="e">EventHandler parameter</param>
+        </member>
+        <member name="M:OtterSauceGui.GuiTextBox.OnActive(System.Object,System.EventArgs)">
+            <summary>
+            Changes the graphical appearance and sets the games Input.KeyString when the text box becomes active
+            </summary>
+            <param name="sender">EventHandler parameter</param>
+            <param name="e">EventHandler parameter</param>
+        </member>
+        <member name="M:OtterSauceGui.GuiTextBox.OnInactive(System.Object,System.EventArgs)">
+            <summary>
+            Changes the graphical appearance when the text box becomes inactive
+            </summary>
+            <param name="sender">EventHandler parameter</param>
+            <param name="e">EventHandler parameter</param>
+        </member>
+        <member name="M:OtterSauceGui.GuiTextBox.OnTextChange(System.Object,System.EventArgs)">
+            <summary>
+            The default method for the OnTextChangeEvent
+            </summary>
+            <param name="sender">EventHandler parameter</param>
+            <param name="e">EventHandler parameter</param>
+        </member>
+        <member name="M:OtterSauceGui.GuiTextBox.SetText(System.String)">
+            <summary>
+            Set the text to be displayed in the textbox.  Can be deleted by the user
+            </summary>
+            <param name="t">The text to display</param>
+        </member>
+        <member name="M:OtterSauceGui.GuiTextBox.ClearText">
+            <summary>
+            Clears the text displayed in the text box and resets the Input.KeyString
+            </summary>
+        </member>
+        <member name="M:OtterSauceGui.GuiTextBox.GetText">
+            <summary>
+            Returns the text displayed in the text box
+            </summary>
+            <returns>The text in the text box</returns>
+        </member>
+        <member name="M:OtterSauceGui.GuiTextBox.GetPassword">
+            <summary>
+            Returns the raw, uncensored password, which was entered in the textbox
+            </summary>
+            <returns>The actual string entered in the text box, not the stars</returns>
+        </member>
+        <member name="M:OtterSauceGui.GuiTextBox.SetSubstringIndex">
+            <summary>
+            Method for determining which part of the string should be displayed when the length of the string exceeds the size of the textbox
+            </summary>
+        </member>
+        <member name="M:OtterSauceGui.GuiTextBox.GetSubstring">
+            <summary>
+            The actual text that will be rendered to the string when the text width exceeds the textbox width
+            </summary>
+            <returns>The text that will be rendered</returns>
+        </member>
+        <member name="M:OtterSauceGui.GuiTextBox.GetNormalString(System.String)">
+            <summary>
+            Checks the keys entered into NORMAL text box
+            </summary>
+            <param name="str">The Input.KeyString of the game</param>
+            <returns>A string containing only permitted characters</returns>
+        </member>
+        <member name="M:OtterSauceGui.GuiTextBox.GetNumericalString(System.String)">
+            <summary>
+            Checks the keys entered into NUMERICAL text box
+            </summary>
+            <param name="str">The Input.KeyString of the game</param>
+            <returns>A string containing only permitted characters</returns>
+        </member>
+        <member name="M:OtterSauceGui.GuiTextBox.GetNumericalDeciString(System.String)">
+            <summary>
+            Checks the keys entered into NUMERICALDECI text box
+            </summary>
+            <param name="str">The Input.KeyString of the game</param>
+            <returns>A string containing only permitted characters</returns>
+        </member>
+        <member name="M:OtterSauceGui.GuiTextBox.GetPasswordString(System.String)">
+            <summary>
+            Checks the keys entered into PASSWORD text box.  Stores the input string in another variable for retrieval using GetPassword().
+            </summary>
+            <param name="str">The Input.KeyString of the game</param>
+            <returns>A string of "*" based on the amount of characters entered</returns>
+        </member>
+        <member name="M:OtterSauceGui.GuiTextBox.GetEmailString(System.String)">
+            <summary>
+            Checks the keys entered into EMAIL text box
+            </summary>
+            <param name="str">The Input.KeyString of the game</param>
+            <returns>A string containing only permitted characters</returns>
+        </member>
+        <member name="M:OtterSauceGui.GuiTextBox.PasteText">
+            <summary>
+            Used for pasting text to the textbox from windows clipboard
+            </summary>
+            <returns>Sting from clipboard</returns>
+        </member>
+        <member name="E:OtterSauceGui.GuiTextBox.OnTextChangeEvent">
+            <summary>
+            This event is fired everytime the text is changed by the user.  ie: Each time the user inputs
+            a character, or deletes a character
+            </summary>
+        </member>
+    </members>
+</doc>
