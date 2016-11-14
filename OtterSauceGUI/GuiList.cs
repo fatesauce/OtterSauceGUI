@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace OtterSauceGui
 {
-    public class GuiList : Widjet
+    /// <summary>
+    /// WIP
+    /// The class to contain and manage GuiListElement widgets
+    /// 
+    /// TODO:
+    /// 
+    /// 
+    /// </summary>
+    public class GuiList : Widget
     {
 
         List<GuiListElement> _listElements;

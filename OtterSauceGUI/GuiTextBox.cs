@@ -49,7 +49,7 @@ namespace OtterSauceGui
     /// <summary>
     /// This class allows you to create text boxes to add to your GuiManager.  Text boxes are designed to accept a single line of input.
     /// </summary>
-    public class GuiTextBox : Widjet
+    public class GuiTextBox : Widget
     {
 
         #region Private Fields

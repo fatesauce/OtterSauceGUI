@@ -44,7 +44,7 @@ namespace OtterSauceGui
     /// <summary>
     /// This class is used to create your "buttons" before adding them to the GuiManager.  All button types are created with this class.
     /// </summary>
-    public class GuiButton : Widjet
+    public class GuiButton : Widget
     {
         #region Private Fields
 

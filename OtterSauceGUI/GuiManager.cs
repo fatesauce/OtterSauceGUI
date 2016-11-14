@@ -108,7 +108,7 @@ namespace OtterSauceGui
         /// your GuiManager object
         /// </summary>
         /// <param name="w">The widjet you wish to add</param>
-        public void AddWidjet(Widjet w)
+        public void AddWidjet(Widget w)
         {
             w.SetGame(game);
             AddComponent(w);
@@ -116,7 +116,7 @@ namespace OtterSauceGui
 
         public void DisableWidjets(bool disabled = true)
         {
-            foreach (Widjet w in GetComponents<Widjet>())
+            foreach (Widget w in GetComponents<Widget>())
             {
                 w.isDisabled = disabled;
             }

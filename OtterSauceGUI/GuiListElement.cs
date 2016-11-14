@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace OtterSauceGui
 {
-    public class GuiListElement : Widjet
+    /// <summary>
+    /// WIP
+    /// Individual components added to the GuiList
+    /// 
+    /// TODO:
+    /// Make selectable with behavior similar to the GuiButton
+    /// </summary>
+    public class GuiListElement : Widget
     {
         public GuiListElement(int px, int py, int w, int h) 
             : base(px, py, w, h)

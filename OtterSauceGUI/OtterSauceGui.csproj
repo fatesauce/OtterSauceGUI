@@ -56,7 +56,7 @@
     <Compile Include="GuiPointer.cs" />
     <Compile Include="GuiTextBox.cs" />
     <Compile Include="GuiTextField.cs" />
-    <Compile Include="Widjet.cs" />
+    <Compile Include="Widget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

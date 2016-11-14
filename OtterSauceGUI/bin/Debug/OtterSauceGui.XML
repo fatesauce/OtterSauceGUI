@@ -36,219 +36,6 @@
             This class is used to create your "buttons" before adding them to the GuiManager.  All button types are created with this class.
             </summary>
         </member>
-        <member name="T:OtterSauceGui.Widjet">
-            <summary>
-            The base class for all Widjets.  Do not use this class directly.  
-            Contains information and rules for how subclasses should behave when certain things happen in your game,
-            as well as primary information that all subclassed Widjets should have.
-            </summary>
-        </member>
-        <member name="F:OtterSauceGui.Widjet.isShortcutSet">
-            <summary>
-            If a shortcut is defined, this will be set to true and the widjet will listen for the key to be pressed.
-            Do not use shortcuts if there are GuiTextBoxes in your gui
-            </summary>
-        </member>
-        <member name="F:OtterSauceGui.Widjet._shortcut">
-            <summary>
-            The Key to be used as the shortcut key for this widjet.
-            </summary>
-        </member>
-        <member name="F:OtterSauceGui.Widjet._label">
-            <summary>
-            A text label to display next to your Widjet
-            </summary>
-        </member>
-        <member name="F:OtterSauceGui.Widjet.game">
-            <summary>
-            Current game instance
-            </summary>
-        </member>
-        <member name="F:OtterSauceGui.Widjet.Width">
-            <summary>
-            Width of the widjet
-            </summary>
-        </member>
-        <member name="F:OtterSauceGui.Widjet.Height">
-            <summary>
-            Height of the widjet
-            </summary>
-        </member>
-        <member name="F:OtterSauceGui.Widjet.PosX">
-            <summary>
-            X coordinate relative to its surface
-            </summary>
-        </member>
-        <member name="F:OtterSauceGui.Widjet.PosY">
-            <summary>
-            Y coordinate relative to its surface
-            </summary>
-        </member>
-        <member name="F:OtterSauceGui.Widjet.clickTimer">
-            <summary>
-            How long a "click" graphic should disply, in frames, before firing the next event
-            </summary>
-        </member>
-        <member name="F:OtterSauceGui.Widjet.clickCounter">
-            <summary>
-            Counts the frames when clicked
-            </summary>
-        </member>
-        <member name="F:OtterSauceGui.Widjet.isDownable">
-            <summary>
-            Used for ButtonType.DOWNABLE GuiButtons.  If true, will repeatedly fire OnClickEvent when the left mouse button
-            is held down on a widjet.  If false, will only fire OnClickEvent once when the button is clicked.
-            </summary>
-        </member>
-        <member name="F:OtterSauceGui.Widjet.hasOnClickFired">
-            <summary>
-            Flag used to tell other events if the OnClickEvent has been invoked
-            </summary>
-        </member>
-        <member name="F:OtterSauceGui.Widjet.hasOnActiveFired">
-            <summary>
-            Flag used to tell other events if the OnActiveEvent has been invoked
-            </summary>
-        </member>
-        <member name="F:OtterSauceGui.Widjet.hasOnInactiveFired">
-            <summary>
-            Flag used to tell other events if the OnInactiveEvent has been invoked
-            </summary>
-        </member>
-        <member name="F:OtterSauceGui.Widjet.hasOnHoverFired">
-            <summary>
-            Flag used to tell other events if the OnHoverEvent has been invoked
-            </summary>
-        </member>
-        <member name="F:OtterSauceGui.Widjet.isActive">
-            <summary>
-            If a widjet has just been clicked, it becomes "active".  
-            There can only be one active widjet at any time regardless of grouping, or which GuiManager the widjet belongs to
-            </summary>
-        </member>
-        <member name="F:OtterSauceGui.Widjet.isDisabled">
-            <summary>
-            Set to true to disable input on this widjet
-            </summary>
-        </member>
-        <member name="F:OtterSauceGui.Widjet.hasClicked">
-            <summary>
-            If a widjet has just been clicked
-            </summary>
-        </member>
-        <member name="M:OtterSauceGui.Widjet.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            Initialises the widjet with basic properties required by all widgets, and initialises events for the widjet
-            </summary>
-            <param name="px">X position of the widjet relative to the GuiManagers surface</param>
-            <param name="py">Y position of the widjet relative to the GuiManagers surface</param>
-            <param name="w">Width of the widjet</param>
-            <param name="h">Height of the widjet</param>
-        </member>
-        <member name="M:OtterSauceGui.Widjet.ClickTimer">
-            <summary>
-            Checks the click timer and sets hasClicked as false if the timer has finished
-            </summary>
-        </member>
-        <member name="M:OtterSauceGui.Widjet.OnActive(System.Object,System.EventArgs)">
-            <summary>
-            The default method added to OnActiveEvent.  Is triggered by all widjets.
-            Dont call this method directly
-            </summary>
-            <param name="sender">EventHandler parameter</param>
-            <param name="e">EventHandler parameter</param>
-        </member>
-        <member name="M:OtterSauceGui.Widjet.OnInactive(System.Object,System.EventArgs)">
-            <summary>
-            The default method added to OnInactiveEvent.  Is triggered by all widjets.
-            Dont call this method directly
-            </summary>
-            <param name="sender">EventHandler parameter</param>
-            <param name="e">EventHandler parameter</param>
-        </member>
-        <member name="M:OtterSauceGui.Widjet.OnClick(System.Object,System.EventArgs)">
-            <summary>
-            The default method added to OnClickEvent.  Is triggered by all widjets.
-            Dont call this method directly
-            </summary>
-            <param name="sender">EventHandler parameter</param>
-            <param name="e">EventHandler parameter</param>
-        </member>
-        <member name="M:OtterSauceGui.Widjet.OnHover(System.Object,System.EventArgs)">
-            <summary>
-            The default method added to OnHoverEvent.  Is triggered by all widjets.
-            Dont call this method directly
-            </summary>
-            <param name="sender">EventHandler parameter</param>
-            <param name="e">EventHandler parameter</param>
-        </member>
-        <member name="M:OtterSauceGui.Widjet.SetGame(Otter.Game)">
-            <summary>
-            Sets the game instance for the widjet to use.
-            Dont call this directly.
-            </summary>
-            <param name="g">The current game instance</param>
-        </member>
-        <member name="M:OtterSauceGui.Widjet.SetShortcut(Otter.Key)">
-            <summary>
-            Set the shortcut key you want to trigger the widjet.  Using the shortcut key
-            invokes an OnClickEvent.
-            Dont use shortcuts if your gui contains a GuiTextBox
-            </summary>
-            <param name="k">The Key you want to reserve for the widjet</param>
-        </member>
-        <member name="M:OtterSauceGui.Widjet.Click">
-            <summary>
-            Call this to manually simulate a click on a widjet from within your code.
-            </summary>
-        </member>
-        <member name="M:OtterSauceGui.Widjet.ResetEventFlags">
-            <summary>
-            Resets flags each time an event is fired, to allow other events to fire.
-            The flags help control when events are fired and how frequently.
-            </summary>
-        </member>
-        <member name="M:OtterSauceGui.Widjet.CheckBounds">
-            <summary>
-            This method is in charge of checking collisions, your mouse position in the gui, and fires events based
-            on user actions.
-            </summary>
-        </member>
-        <member name="M:OtterSauceGui.Widjet.CheckKey">
-            <summary>
-            If you set a shortcut key for the widjet, this method checks to see
-            when the user presses the key, and responds to it with a Click()
-            </summary>
-        </member>
-        <member name="M:OtterSauceGui.Widjet.CheckMouseClick">
-            <summary>
-            Checks if the mouse has been "Pressed" or is "down" based on the widjet type.
-            </summary>
-            <returns>Returns true if the mouse is clicked in the bounds of a widjet</returns>
-        </member>
-        <member name="E:OtterSauceGui.Widjet.OnClickEvent">
-            <summary>
-            Fired when a user clicks a widjet.  In most cases it will only fire ONCE per click.
-            If the widjet field "isDownable" is true, it will fire EVERY FRAME while the mouse button is held over it.
-            </summary>
-        </member>
-        <member name="E:OtterSauceGui.Widjet.OnActiveEvent">
-            <summary>
-            Fired ONCE when a widjet becomes active.  A widjet becomes active after the user clicks on it.  Only one widjet can be active in the game scene at any one time.
-            Used mainly for changing widjet graphics based on the isActive flag, and for choosing which GuiTextBox should allow input.
-            </summary>
-        </member>
-        <member name="E:OtterSauceGui.Widjet.OnInactiveEvent">
-            <summary>
-            Fires ONCE when a widjet becomes inactive.  Used mainly for preventing GuiTextBox input and changing widjet graphics.
-            </summary>
-        </member>
-        <member name="E:OtterSauceGui.Widjet.OnHoverEvent">
-            <summary>
-            Fires ONCE when a users mouse hovors over the widjet.  Used mainly for changing the widjet graphic.  
-            Reverts back to an "active" or "inactive" graphic when the mouse moves out of bounds of the widjet.
-            </summary>
-        </member>
         <member name="F:OtterSauceGui.GuiButton.buttonGroup">
             <summary>
             Contains a list of other RADIO GuiButtons that share the same group as this widjet.
@@ -272,6 +59,16 @@
         <member name="F:OtterSauceGui.GuiButton.isSelected">
             <summary>
             Used with TOGGLE GuiButtons and RADIO GuiButtons to mark if the button is selected or not
+            </summary>
+        </member>
+        <member name="E:OtterSauceGui.GuiButton.OnSelectedEvent">
+            <summary>
+            Fires when a TOGGLE or RADIO GuiButton is clicked on.  Not the same as OnActiveEvent.  Many widjets can be flagged as "selected" at the same time.
+            </summary>
+        </member>
+        <member name="E:OtterSauceGui.GuiButton.OnDeselectedEvent">
+            <summary>
+            Fires when a TOGGLE or RADIO GuiButton is deselected.
             </summary>
         </member>
         <member name="M:OtterSauceGui.GuiButton.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,OtterSauceGui.ButtonType)">
@@ -390,16 +187,6 @@
             Used for TOGGLE buttons to alternate their selected state on clicking
             </summary>
         </member>
-        <member name="E:OtterSauceGui.GuiButton.OnSelectedEvent">
-            <summary>
-            Fires when a TOGGLE or RADIO GuiButton is clicked on.  Not the same as OnActiveEvent.  Many widjets can be flagged as "selected" at the same time.
-            </summary>
-        </member>
-        <member name="E:OtterSauceGui.GuiButton.OnDeselectedEvent">
-            <summary>
-            Fires when a TOGGLE or RADIO GuiButton is deselected.
-            </summary>
-        </member>
         <member name="T:OtterSauceGui.GuiManager">
             <summary>
             This is the base class for creating an OtterSauceGui in Otter.
@@ -482,6 +269,12 @@
         <member name="F:OtterSauceGui.GuiTextBox.MaxCharacters">
             <summary>
             The maximum amount of characters the user can input and display at once
+            </summary>
+        </member>
+        <member name="E:OtterSauceGui.GuiTextBox.OnTextChangeEvent">
+            <summary>
+            This event is fired everytime the text is changed by the user.  ie: Each time the user inputs
+            a character, or deletes a character
             </summary>
         </member>
         <member name="M:OtterSauceGui.GuiTextBox.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,OtterSauceGui.TextBoxType)">
@@ -612,11 +405,218 @@
             </summary>
             <returns>Sting from clipboard</returns>
         </member>
-        <member name="E:OtterSauceGui.GuiTextBox.OnTextChangeEvent">
+        <member name="T:OtterSauceGui.Widjet">
             <summary>
-            This event is fired everytime the text is changed by the user.  ie: Each time the user inputs
-            a character, or deletes a character
+            The base class for all Widjets.  Do not use this class directly.  
+            Contains information and rules for how subclasses should behave when certain things happen in your game,
+            as well as primary information that all subclassed Widjets should have.
             </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.isShortcutSet">
+            <summary>
+            If a shortcut is defined, this will be set to true and the widjet will listen for the key to be pressed.
+            Do not use shortcuts if there are GuiTextBoxes in your gui
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet._shortcut">
+            <summary>
+            The Key to be used as the shortcut key for this widjet.
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet._label">
+            <summary>
+            A text label to display next to your Widjet
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.game">
+            <summary>
+            Current game instance
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.Width">
+            <summary>
+            Width of the widjet
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.Height">
+            <summary>
+            Height of the widjet
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.PosX">
+            <summary>
+            X coordinate relative to its surface
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.PosY">
+            <summary>
+            Y coordinate relative to its surface
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.clickTimer">
+            <summary>
+            How long a "click" graphic should disply, in frames, before firing the next event
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.clickCounter">
+            <summary>
+            Counts the frames when clicked
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.isDownable">
+            <summary>
+            Used for ButtonType.DOWNABLE GuiButtons.  If true, will repeatedly fire OnClickEvent when the left mouse button
+            is held down on a widjet.  If false, will only fire OnClickEvent once when the button is clicked.
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.hasOnClickFired">
+            <summary>
+            Flag used to tell other events if the OnClickEvent has been invoked
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.hasOnActiveFired">
+            <summary>
+            Flag used to tell other events if the OnActiveEvent has been invoked
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.hasOnInactiveFired">
+            <summary>
+            Flag used to tell other events if the OnInactiveEvent has been invoked
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.hasOnHoverFired">
+            <summary>
+            Flag used to tell other events if the OnHoverEvent has been invoked
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.isActive">
+            <summary>
+            If a widjet has just been clicked, it becomes "active".  
+            There can only be one active widjet at any time regardless of grouping, or which GuiManager the widjet belongs to
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.isDisabled">
+            <summary>
+            Set to true to disable input on this widjet
+            </summary>
+        </member>
+        <member name="F:OtterSauceGui.Widjet.hasClicked">
+            <summary>
+            If a widjet has just been clicked
+            </summary>
+        </member>
+        <member name="E:OtterSauceGui.Widjet.OnClickEvent">
+            <summary>
+            Fired when a user clicks a widjet.  In most cases it will only fire ONCE per click.
+            If the widjet field "isDownable" is true, it will fire EVERY FRAME while the mouse button is held over it.
+            </summary>
+        </member>
+        <member name="E:OtterSauceGui.Widjet.OnActiveEvent">
+            <summary>
+            Fired ONCE when a widjet becomes active.  A widjet becomes active after the user clicks on it.  Only one widjet can be active in the game scene at any one time.
+            Used mainly for changing widjet graphics based on the isActive flag, and for choosing which GuiTextBox should allow input.
+            </summary>
+        </member>
+        <member name="E:OtterSauceGui.Widjet.OnInactiveEvent">
+            <summary>
+            Fires ONCE when a widjet becomes inactive.  Used mainly for preventing GuiTextBox input and changing widjet graphics.
+            </summary>
+        </member>
+        <member name="E:OtterSauceGui.Widjet.OnHoverEvent">
+            <summary>
+            Fires ONCE when a users mouse hovors over the widjet.  Used mainly for changing the widjet graphic.  
+            Reverts back to an "active" or "inactive" graphic when the mouse moves out of bounds of the widjet.
+            </summary>
+        </member>
+        <member name="M:OtterSauceGui.Widjet.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initialises the widjet with basic properties required by all widgets, and initialises events for the widjet
+            </summary>
+            <param name="px">X position of the widjet relative to the GuiManagers surface</param>
+            <param name="py">Y position of the widjet relative to the GuiManagers surface</param>
+            <param name="w">Width of the widjet</param>
+            <param name="h">Height of the widjet</param>
+        </member>
+        <member name="M:OtterSauceGui.Widjet.ClickTimer">
+            <summary>
+            Checks the click timer and sets hasClicked as false if the timer has finished
+            </summary>
+        </member>
+        <member name="M:OtterSauceGui.Widjet.OnActive(System.Object,System.EventArgs)">
+            <summary>
+            The default method added to OnActiveEvent.  Is triggered by all widjets.
+            Dont call this method directly
+            </summary>
+            <param name="sender">EventHandler parameter</param>
+            <param name="e">EventHandler parameter</param>
+        </member>
+        <member name="M:OtterSauceGui.Widjet.OnInactive(System.Object,System.EventArgs)">
+            <summary>
+            The default method added to OnInactiveEvent.  Is triggered by all widjets.
+            Dont call this method directly
+            </summary>
+            <param name="sender">EventHandler parameter</param>
+            <param name="e">EventHandler parameter</param>
+        </member>
+        <member name="M:OtterSauceGui.Widjet.OnClick(System.Object,System.EventArgs)">
+            <summary>
+            The default method added to OnClickEvent.  Is triggered by all widjets.
+            Dont call this method directly
+            </summary>
+            <param name="sender">EventHandler parameter</param>
+            <param name="e">EventHandler parameter</param>
+        </member>
+        <member name="M:OtterSauceGui.Widjet.OnHover(System.Object,System.EventArgs)">
+            <summary>
+            The default method added to OnHoverEvent.  Is triggered by all widjets.
+            Dont call this method directly
+            </summary>
+            <param name="sender">EventHandler parameter</param>
+            <param name="e">EventHandler parameter</param>
+        </member>
+        <member name="M:OtterSauceGui.Widjet.SetGame(Otter.Game)">
+            <summary>
+            Sets the game instance for the widjet to use.
+            Dont call this directly.
+            </summary>
+            <param name="g">The current game instance</param>
+        </member>
+        <member name="M:OtterSauceGui.Widjet.SetShortcut(Otter.Key)">
+            <summary>
+            Set the shortcut key you want to trigger the widjet.  Using the shortcut key
+            invokes an OnClickEvent.
+            Dont use shortcuts if your gui contains a GuiTextBox
+            </summary>
+            <param name="k">The Key you want to reserve for the widjet</param>
+        </member>
+        <member name="M:OtterSauceGui.Widjet.Click">
+            <summary>
+            Call this to manually simulate a click on a widjet from within your code.
+            </summary>
+        </member>
+        <member name="M:OtterSauceGui.Widjet.ResetEventFlags">
+            <summary>
+            Resets flags each time an event is fired, to allow other events to fire.
+            The flags help control when events are fired and how frequently.
+            </summary>
+        </member>
+        <member name="M:OtterSauceGui.Widjet.CheckBounds">
+            <summary>
+            This method is in charge of checking collisions, your mouse position in the gui, and fires events based
+            on user actions.
+            </summary>
+        </member>
+        <member name="M:OtterSauceGui.Widjet.CheckKey">
+            <summary>
+            If you set a shortcut key for the widjet, this method checks to see
+            when the user presses the key, and responds to it with a Click()
+            </summary>
+        </member>
+        <member name="M:OtterSauceGui.Widjet.CheckMouseClick">
+            <summary>
+            Checks if the mouse has been "Pressed" or is "down" based on the widjet type.
+            </summary>
+            <returns>Returns true if the mouse is clicked in the bounds of a widjet</returns>
         </member>
     </members>
 </doc>

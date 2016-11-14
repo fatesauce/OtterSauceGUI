@@ -8,7 +8,16 @@ using Otter;
 
 namespace OtterSauceGui
 {
-    public class GuiTextField : Widjet
+    /// <summary>
+    /// WIP 
+    /// Multi line text area.
+    /// 
+    /// TODO:
+    /// Word wrapping
+    /// Scrolling
+    /// Organising multiple lines of text
+    /// </summary>
+    public class GuiTextField : Widget
     {
 
         private List<Text> TextDisplay;

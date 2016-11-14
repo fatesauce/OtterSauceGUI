@@ -9,28 +9,28 @@ using Otter;
 namespace OtterSauceGui
 {
     /// <summary>
-    /// The base class for all Widjets.  Do not use this class directly.  
+    /// The base class for all Widgets.  Do not use this class directly.  
     /// Contains information and rules for how subclasses should behave when certain things happen in your game,
-    /// as well as primary information that all subclassed Widjets should have.
+    /// as well as primary information that all subclassed Widgets should have.
     /// </summary>
-    public class Widjet : Component
+    public class Widget : Component
     {
 
         #region Private Fields
 
         /// <summary>
-        /// If a shortcut is defined, this will be set to true and the widjet will listen for the key to be pressed.
+        /// If a shortcut is defined, this will be set to true and the Widget will listen for the key to be pressed.
         /// Do not use shortcuts if there are GuiTextBoxes in your gui
         /// </summary>
         private bool isShortcutSet = false;
 
         /// <summary>
-        /// The Key to be used as the shortcut key for this widjet.
+        /// The Key to be used as the shortcut key for this Widget.
         /// </summary>
         private Key _shortcut;
 
         /// <summary>
-        /// A text label to display next to your Widjet
+        /// A text label to display next to your Widget
         /// </summary>
         private Text _label;
 
@@ -44,12 +44,12 @@ namespace OtterSauceGui
         protected Game game;
 
         /// <summary>
-        /// Width of the widjet
+        /// Width of the Widget
         /// </summary>
         protected int Width;
 
         /// <summary>
-        /// Height of the widjet
+        /// Height of the Widget
         /// </summary>
         protected int Height;
 
@@ -75,7 +75,7 @@ namespace OtterSauceGui
 
         /// <summary>
         /// Used for ButtonType.DOWNABLE GuiButtons.  If true, will repeatedly fire OnClickEvent when the left mouse button
-        /// is held down on a widjet.  If false, will only fire OnClickEvent once when the button is clicked.
+        /// is held down on a Widget.  If false, will only fire OnClickEvent once when the button is clicked.
         /// </summary>
         protected bool isDownable = false;
 
@@ -104,18 +104,18 @@ namespace OtterSauceGui
         #region Public Fields
 
         /// <summary>
-        /// If a widjet has just been clicked, it becomes "active".  
-        /// There can only be one active widjet at any time regardless of grouping, or which GuiManager the widjet belongs to
+        /// If a Widget has just been clicked, it becomes "active".  
+        /// There can only be one active Widget at any time regardless of grouping, or which GuiManager the Widget belongs to
         /// </summary>
         public bool isActive = false;
 
         /// <summary>
-        /// Set to true to disable input on this widjet
+        /// Set to true to disable input on this Widget
         /// </summary>
         public bool isDisabled = false;
 
         /// <summary>
-        /// If a widjet has just been clicked
+        /// If a Widget has just been clicked
         /// </summary>
         public bool hasClicked = false;
 
@@ -128,25 +128,25 @@ namespace OtterSauceGui
         #region Events
 
         /// <summary>
-        /// Fired when a user clicks a widjet.  In most cases it will only fire ONCE per click.
-        /// If the widjet field "isDownable" is true, it will fire EVERY FRAME while the mouse button is held over it.
+        /// Fired when a user clicks a Widget.  In most cases it will only fire ONCE per click.
+        /// If the Widget field "isDownable" is true, it will fire EVERY FRAME while the mouse button is held over it.
         /// </summary>
         public event EventHandler OnClickEvent;
 
         /// <summary>
-        /// Fired ONCE when a widjet becomes active.  A widjet becomes active after the user clicks on it.  Only one widjet can be active in the game scene at any one time.
-        /// Used mainly for changing widjet graphics based on the isActive flag, and for choosing which GuiTextBox should allow input.
+        /// Fired ONCE when a Widget becomes active.  A Widget becomes active after the user clicks on it.  Only one Widget can be active in the game scene at any one time.
+        /// Used mainly for changing Widget graphics based on the isActive flag, and for choosing which GuiTextBox should allow input.
         /// </summary>
         public event EventHandler OnActiveEvent;
 
         /// <summary>
-        /// Fires ONCE when a widjet becomes inactive.  Used mainly for preventing GuiTextBox input and changing widjet graphics.
+        /// Fires ONCE when a Widget becomes inactive.  Used mainly for preventing GuiTextBox input and changing Widget graphics.
         /// </summary>
         public event EventHandler OnInactiveEvent;
 
         /// <summary>
-        /// Fires ONCE when a users mouse hovors over the widjet.  Used mainly for changing the widjet graphic.  
-        /// Reverts back to an "active" or "inactive" graphic when the mouse moves out of bounds of the widjet.
+        /// Fires ONCE when a users mouse hovors over the Widget.  Used mainly for changing the Widget graphic.  
+        /// Reverts back to an "active" or "inactive" graphic when the mouse moves out of bounds of the Widget.
         /// </summary>
         public event EventHandler OnHoverEvent;
 
@@ -155,13 +155,13 @@ namespace OtterSauceGui
         #region Constructor
 
         /// <summary>
-        /// Initialises the widjet with basic properties required by all widgets, and initialises events for the widjet
+        /// Initialises the Widget with basic properties required by all widgets, and initialises events for the Widget
         /// </summary>
-        /// <param name="px">X position of the widjet relative to the GuiManagers surface</param>
-        /// <param name="py">Y position of the widjet relative to the GuiManagers surface</param>
-        /// <param name="w">Width of the widjet</param>
-        /// <param name="h">Height of the widjet</param>
-        public Widjet(int px, int py, int w, int h)
+        /// <param name="px">X position of the Widget relative to the GuiManagers surface</param>
+        /// <param name="py">Y position of the Widget relative to the GuiManagers surface</param>
+        /// <param name="w">Width of the Widget</param>
+        /// <param name="h">Height of the Widget</param>
+        public Widget(int px, int py, int w, int h)
         {
             PosX = px;
             PosY = py;
@@ -232,7 +232,7 @@ namespace OtterSauceGui
         #region Default Event Methods
 
         /// <summary>
-        /// The default method added to OnActiveEvent.  Is triggered by all widjets.
+        /// The default method added to OnActiveEvent.  Is triggered by all Widgets.
         /// Dont call this method directly
         /// </summary>
         /// <param name="sender">EventHandler parameter</param>
@@ -244,7 +244,7 @@ namespace OtterSauceGui
         }
 
         /// <summary>
-        /// The default method added to OnInactiveEvent.  Is triggered by all widjets.
+        /// The default method added to OnInactiveEvent.  Is triggered by all Widgets.
         /// Dont call this method directly
         /// </summary>
         /// <param name="sender">EventHandler parameter</param>
@@ -256,7 +256,7 @@ namespace OtterSauceGui
         }
 
         /// <summary>
-        /// The default method added to OnClickEvent.  Is triggered by all widjets.
+        /// The default method added to OnClickEvent.  Is triggered by all Widgets.
         /// Dont call this method directly
         /// </summary>
         /// <param name="sender">EventHandler parameter</param>
@@ -270,7 +270,7 @@ namespace OtterSauceGui
         }
 
         /// <summary>
-        /// The default method added to OnHoverEvent.  Is triggered by all widjets.
+        /// The default method added to OnHoverEvent.  Is triggered by all Widgets.
         /// Dont call this method directly
         /// </summary>
         /// <param name="sender">EventHandler parameter</param>
@@ -288,7 +288,7 @@ namespace OtterSauceGui
         #region Public Methods
 
         /// <summary>
-        /// Sets the game instance for the widjet to use.
+        /// Sets the game instance for the Widget to use.
         /// Dont call this directly.
         /// </summary>
         /// <param name="g">The current game instance</param>
@@ -298,11 +298,11 @@ namespace OtterSauceGui
         }
 
         /// <summary>
-        /// Set the shortcut key you want to trigger the widjet.  Using the shortcut key
+        /// Set the shortcut key you want to trigger the Widget.  Using the shortcut key
         /// invokes an OnClickEvent.
         /// Dont use shortcuts if your gui contains a GuiTextBox
         /// </summary>
-        /// <param name="k">The Key you want to reserve for the widjet</param>
+        /// <param name="k">The Key you want to reserve for the Widget</param>
         public void SetShortcut(Key k)
         {
             _shortcut = k;
@@ -327,7 +327,7 @@ namespace OtterSauceGui
         }
 
         /// <summary>
-        /// Call this to manually simulate a click on a widjet from within your code.
+        /// Call this to manually simulate a click on a Widget from within your code.
         /// </summary>
         public void Click()
         {
@@ -388,7 +388,7 @@ namespace OtterSauceGui
         }
 
         /// <summary>
-        /// If you set a shortcut key for the widjet, this method checks to see
+        /// If you set a shortcut key for the Widget, this method checks to see
         /// when the user presses the key, and responds to it with a Click()
         /// </summary>
         private void CheckKey()
@@ -400,9 +400,9 @@ namespace OtterSauceGui
         }
 
         /// <summary>
-        /// Checks if the mouse has been "Pressed" or is "down" based on the widjet type.
+        /// Checks if the mouse has been "Pressed" or is "down" based on the Widget type.
         /// </summary>
-        /// <returns>Returns true if the mouse is clicked in the bounds of a widjet</returns>
+        /// <returns>Returns true if the mouse is clicked in the bounds of a Widget</returns>
         private bool CheckMouseClick()
         {
             if (isDownable)
